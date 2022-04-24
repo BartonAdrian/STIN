@@ -48,9 +48,28 @@ function checkQuestion(msg){
     msg=msg.toLowerCase();
     if(msg.includes("what") && msg.includes("name")){
         return "My name is "+name+".";
+    }else if(msg.includes("what") && msg.includes("time")){
+        return "The time now is "+getTime();
     }else{
         return help;
     }
+}
+
+function getTime(){
+    const date = new Date();
+  
+    const formatData = (input) => {
+    if (input > 9) {
+        return input;
+    } else return `0${input}`;
+    };
+
+    const format = {
+        HH: formatData(date.getHours()),
+        MM: formatData(date.getMinutes()),
+    };
+
+    return (`${format.HH}:${format.MM}`);
 }
 
 
