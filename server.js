@@ -6,6 +6,11 @@ var bodyparser=require('body-parser');
 var session=require('express-session');
 
 const name="Shfaron";
+const help= "Get my name - Keywords WHAT and NAME"+"<br><br>"+
+             "Get actual time -Keywords WHAT and TIME"+"<br><br>"+
+             "Get the current euro exchange rate - Keywords EUR, EXCHANGE and RATE "+"<br><br>"+
+             "Get the history of the euro- Keywords EUR and HISTORY "+"<br><br>"+
+             "Help commands - write HELP";
 
 app.use(express.static(path.join(__dirname+"/public")));
 
@@ -40,9 +45,13 @@ app.post('/', (req, res) => {
 });
 
 function checkQuestion(msg){
-    return "odpoved";
+    msg=msg.toLowerCase();
+    if(msg.includes("what") && msg.includes("name")){
+        return "My name is "+name+".";
+    }else{
+        return help;
+    }
 }
-
 
 
 app.listen(3000, () => {

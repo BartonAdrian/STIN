@@ -26,7 +26,6 @@
                 return res.json();
             })
             .then((data) => renderMessage("other",{username:data.name,text:data.response}));
-            //renderMessage("other",data));
 
         app.querySelector(".chat-screen #message-input").value="";
     });
@@ -34,7 +33,7 @@
 
     function renderMessage(type, message){
         let messsageContainer = app.querySelector(".chat-screen .messages");
-        console.log(message);
+        //console.log(message);
         if(type=="my"){
             let el=document.createElement("div");
             el.setAttribute("class","message my-message");
