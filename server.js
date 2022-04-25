@@ -1,78 +1,55 @@
+//-----------------------------------------------
+//Imports
 const express = require('express');
 const path = require('path');
 const app = express();
-let cookieParser = require('cookie-parser');
-var bodyparser=require('body-parser');
-var session=require('express-session');
-
-const name="Shfaron";
-const help= "Get my name - Keywords WHAT and NAME"+"<br><br>"+
-             "Get actual time -Keywords WHAT and TIME"+"<br><br>"+
-             "Get the current euro exchange rate - Keywords EUR, EXCHANGE and RATE "+"<br><br>"+
-             "Get the history of the euro- Keywords EUR and HISTORY "+"<br><br>"+
-             "Help commands - write HELP";
-
+var CronJob = require('cron').CronJob;
+const currency = require("./currency");
+const timeManager= require("./timeManager");
+const messageManager=require("./messageManager");
+//-----------------------------------------------
+//Aplication
 app.use(express.static(path.join(__dirname+"/public")));
-
 app.use(express.json());
-app.use(cookieParser());
-app.use(session({
-secret:'secret',
-resave:false,
-saveUninitialized:false,
-cookie:{
-maxAge:10000
-}}));
- 
+
+//-----------------------------------------------
+//Constatns
+const name ="Tuppee";
+
+//-----------------------------------------------
+//Start
+currency.downloadCurrencyData("EUR");
+
+//-----------------------------------------------
+//Cron Job- every day between 12-15 at 5 minute intervals
+const job = new CronJob('0 */5 14-15 * * MON-FRI', function() {
+    var date=timeManager.parseDate(currency.getCurrentEuro().split("-")[1]);
+    if(timeManager.isDateToday(date)==false){
+        currency.downloadCurrencyData("EUR");
+    }
+});
+job.start();
+//-----------------------------------------------
+
+//-----------------------------------------------
+//GET METHOD
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
- 
+//-----------------------------------------------
+//POST METHOD
 app.post('/', (req, res) => {
     const { message } = req.headers;
-    const response=checkQuestion(message);
-    console.log(req.cookies);
-    //console.log(message);
-    let conversation={
-        question: message,
-        answer: response,
-    }
-    res.cookie('cookieName',{conversation});
+    const response=messageManager.requestReview(message,name);
     res.send({
       name,
       response,
     });
 });
 
-function checkQuestion(msg){
-    msg=msg.toLowerCase();
-    if(msg.includes("what") && msg.includes("name")){
-        return "My name is "+name+".";
-    }else if(msg.includes("what") && msg.includes("time")){
-        return "The time now is "+getTime();
-    }else{
-        return help;
-    }
-}
-
-function getTime(){
-    const date = new Date();
-  
-    const formatData = (input) => {
-    if (input > 9) {
-        return input;
-    } else return `0${input}`;
-    };
-
-    const format = {
-        HH: formatData(date.getHours()),
-        MM: formatData(date.getMinutes()),
-    };
-
-    return (`${format.HH}:${format.MM}`);
-}
-
-
+//-----------------------------------------------
+//Port listening
 app.listen(3000, () => {
     console.log('Our express server is up on port 3000');
   });
+//-----------------------------------------------

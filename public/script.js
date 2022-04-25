@@ -5,6 +5,12 @@
 
     app.querySelector(".chat-screen #send-message").addEventListener("click",function(){
         let message=app.querySelector(".chat-screen #message-input").value;
+
+        if(!validate(message)){
+            app.querySelector(".chat-screen #message-input").value="";
+            return;
+        }
+
         if(message.length==0){
             return;
         }
@@ -29,6 +35,17 @@
 
         app.querySelector(".chat-screen #message-input").value="";
     });
+
+    function validate(input){
+        const forbiddenChars= ["<",">","script","%"];
+        var result=true;
+        forbiddenChars.forEach(element => {
+            if(input.includes(element)){
+                result= false;
+            }
+        });
+        return result;
+    }
 
 
     function renderMessage(type, message){
