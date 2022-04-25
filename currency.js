@@ -21,6 +21,9 @@ function downloadCurrencyData(kod){
         });
     });
     let content = fs.readFileSync(dataCurrency).toString();
+    if(timeManager.isDateToday(timeManager.parseDate(getCurrentEuro().split("-")[1]))){
+        return true;
+    }
     if(!timeManager.isDateToday(timeManager.parseDate(content.split(" ")[0]))){
         return;
     }
@@ -33,6 +36,7 @@ function downloadCurrencyData(kod){
               return;
         }
     });
+    return true;
 }
 
 //-----------------------------------------------
