@@ -1,5 +1,5 @@
 //-----------------------------------------------
-//Parse string to Date
+//Parse string to Date (world format)
 function parseDate(datum){
     const datumTxt=datum.split(".");
     return new Date(datumTxt[1] + " " + datumTxt[0]+" "+datumTxt[2]);

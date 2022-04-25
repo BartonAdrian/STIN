@@ -4,7 +4,7 @@
   "description": "Chatbot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha './tests/*.spec.js'"
   },
   "author": "Adrian Bartoň",
   "license": "ISC",
@@ -16,5 +16,9 @@
     "express-session": "^1.17.2",
     "socket.io": "^4.4.1",
     "url-exists-nodejs": "^0.2.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2"
   }
 }
