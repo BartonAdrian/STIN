@@ -73,6 +73,8 @@ describe("Test currency", function() {
     });
     it("Test - Download data", function() {
         expect(currency.downloadCurrencyData()).to.be.false;
-        expect(currency.downloadCurrencyData()).to.be.not.ok;
+        expect(currency.downloadCurrencyData(null)).to.be.not.ok;
+        expect(currency.downloadCurrencyData("Nevim")).to.be.false;
+        //expect(currency.downloadCurrencyData("EUR")).to.be.false;
     });
 });
