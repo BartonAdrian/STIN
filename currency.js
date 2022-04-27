@@ -21,19 +21,17 @@ function downloadCurrencyData(kod) {
         });
     });
     let content = fs.readFileSync(dataCurrency).toString();
-    if (timeManager.isDateToday(timeManager.parseDate(getCurrentEuro().split("-")[1]))) {
-        return false;
-    }
-    if (timeManager.isDateToday(timeManager.parseDate(content.split(" ")[0]))) {
-        return false;
-    }
     content.split(/\r?\n/).forEach(element => {
-        if (element.includes(kod)) {
+        if (element.includes(kod) && !timeManager.isDateToday(timeManager.parseDate(content.split(" ")[0]))) {
             fs.appendFileSync(dataListCurrency, element + "|" + content.split(/\r?\n/)[0] + "\n", function(err) {
                 if (err) throw err;
                 console.log('Saved!');
             });
+            fs.close;
             return true;
+        }
+        else{
+            return false;
         }
     });
     return false;
