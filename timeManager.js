@@ -1,8 +1,8 @@
 //-----------------------------------------------
 //Parse string to Date (world format)
-function parseDate(datum){
-    const datumTxt=datum.split(".");
-    return new Date(datumTxt[1] + " " + datumTxt[0]+" "+datumTxt[2]);
+function parseDate(datum) {
+    const datumTxt = datum.split(".");
+    return new Date(datumTxt[1] + " " + datumTxt[0] + " " + datumTxt[2]);
 }
 
 //-----------------------------------------------
@@ -24,19 +24,19 @@ function isDateToday(date) {
 
 //-----------------------------------------------
 //Return actual time in DD.MM.YYYY format
-function getTodayDate(){
+function getTodayDate() {
     const date = new Date();
-  
+
     const formatData = (input) => {
-    if (input > 9) {
-        return input;
-    } else return `0${input}`;
+        if (input > 9) {
+            return input;
+        } else return `0${input}`;
     };
 
     const format = {
         DD: formatData(date.getDate()),
-        MM: formatData(date.getMonth()+1),
-        YYYY: formatData(date.getFullYear()), 
+        MM: formatData(date.getMonth() + 1),
+        YYYY: formatData(date.getFullYear()),
     };
 
     return (`${format.DD}.${format.MM}.${format.YYYY}`);
@@ -44,18 +44,12 @@ function getTodayDate(){
 
 //-----------------------------------------------
 //Return actual time in HH:MM format
-function getTime(){
+function getTime() {
     const date = new Date();
-  
-    const formatData = (input) => {
-    if (input > 9) {
-        return input;
-    } else return `0${input}`;
-    };
 
     const format = {
-        HH: formatData(date.getHours()),
-        MM: formatData(date.getMinutes()),
+        HH: date.getHours(),
+        MM: date.getMinutes(),
     };
 
     return (`${format.HH}:${format.MM}`);
@@ -63,4 +57,4 @@ function getTime(){
 
 //-----------------------------------------------
 //Export
-module.exports = { getTime, isDateToday,getTodayDate, parseDate };
+module.exports = { getTime, isDateToday, getTodayDate, parseDate };
