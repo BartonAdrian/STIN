@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651071075666" clover="3.2.0">
-  <project timestamp="1651071075666" name="All files">
+<coverage generated="1651143805404" clover="3.2.0">
+  <project timestamp="1651143805404" name="All files">
     <metrics statements="75" coveredstatements="67" conditionals="39" coveredconditionals="34" methods="16" coveredmethods="13" elements="130" coveredelements="114" complexity="0" loc="75" ncloc="75" packages="1" files="3" classes="3"/>
     <file name="currency.js" path="C:\Users\barta\OneDrive\Dokumenty\GitHub\STIN\currency.js">
       <metrics statements="34" coveredstatements="26" conditionals="9" coveredconditionals="4" methods="8" coveredmethods="5"/>
