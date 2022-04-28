@@ -4,7 +4,8 @@
     "description": "Chatbot",
     "main": "index.js",
     "scripts": {
-        "test": "mocha './tests/*.spec.js'",
+        "test": "mocha './tests/func.test.js'",
+        "testf": "mocha './tests/script.test.js'",
         "coverage": "jest --coverage"
     },
     "author": "Adrian Bartoň",
