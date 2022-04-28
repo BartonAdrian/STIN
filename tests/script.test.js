@@ -1,18 +1,6 @@
 const { expect } = require("chai");
 const script = require("../public/script");
 
-beforeEach(() => {
-    const document = new JSDOM(
-        `<html>
-         <body>
-         </body>
-       </html>`, { url: 'http://localhost' },
-    );
-
-    global.window = dom.window;
-    global.document = dom.window.document;
-});
-
 describe("Frontend Tests", function() {
     it("Validation input test", function() {
         expect(script.validate("<script>")).to.be.false;
