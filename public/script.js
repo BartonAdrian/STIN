@@ -48,7 +48,7 @@
     }
 
 
-    function renderMessage(doc, type, message) {
+    function renderMessage(type, message) {
         let messsageContainer = app.querySelector(".chat-screen .messages");
         //console.log(message);
         if (type == "my") {
