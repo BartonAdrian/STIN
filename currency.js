@@ -3,6 +3,7 @@
 const http = require('https');
 const fs = require('fs');
 const timeManager = require('./timeManager');
+const res = require('express/lib/response');
 
 //-----------------------------------------------
 //Constants
@@ -55,6 +56,52 @@ function getHistoryEuro() {
 }
 
 //-----------------------------------------------
+//Recomendation of euro
+function recommendEuro(){
+    let content = fs.readFileSync(dataListCurrency).toString();
+    let cnt = content.split(/\r?\n/);
+    let res="";
+
+    if(cnt.length<4)
+        return "Insufficient data";
+
+    let llday=cnt[cnt.length-4];
+    let lday=cnt[cnt.length-3];
+    let day=cnt[cnt.length-2];
+
+    let rates=[parseFloat(llday.split("|")[4].replace(",",".")),parseFloat(lday.split("|")[4].replace(",",".")),parseFloat(day.split("|")[4].replace(",","."))];
+
+    if(decreasing(rates)){
+        return "I recommend buying the euro (declining for three days).";
+    }else{
+        res += "Not declining for three days. ";
+    }
+
+    if(average(rates)){
+        return "I recommend buying the euro (The last increase does not exceed 10% of the average).";
+    }else{
+        res += "The latest increase exceeds 10% of the average.";
+    }
+    
+    return "I do not recommend buying the euro ("+res+")";
+}
+
+function decreasing(rates){
+    if(rates[0]>rates[1] && rates[1]>rates[2]){
+        return true;
+    }
+    return false;
+}
+
+function average(rates){
+    let avg=((rates[0]+rates[1]+rates[2])/3)/10;
+    if(Math.abs(rates[2]-rates[1])<avg){
+        return true;
+    }
+    return false;
+}
+
+//-----------------------------------------------
 //Returns the current euro exchange rate
 function getCurrentEuro() {
     let content = fs.readFileSync(dataListCurrency).toString();
@@ -65,4 +112,4 @@ function getCurrentEuro() {
 
 //-----------------------------------------------
 //Export
-module.exports = { getHistoryEuro, getCurrentEuro, downloadCurrencyData };
+module.exports = {recommendEuro, decreasing, average, getHistoryEuro, getCurrentEuro, downloadCurrencyData };

@@ -8,6 +8,7 @@ const timeManager= require("./timeManager")
 const help= "Get my name - Keywords WHAT and NAME"+"<br><br>"+
              "Get actual time -Keywords WHAT and TIME"+"<br><br>"+
              "Get the current euro exchange rate - Keywords EUR, EXCHANGE and RATE "+"<br><br>"+
+             "Get a recommendation to buy euro- Keywords EUR, CURRENT and FAVORABLE "+"<br><br>"+
              "Get the history of the euro- Keywords EUR and HISTORY "+"<br><br>"+
              "Help commands - write HELP";
 
@@ -22,6 +23,8 @@ function requestReview(msg,name){
         return "The time now is "+timeManager.getTime();
     }else if(msg.includes("eur") && msg.includes("history")){
         return currency.getHistoryEuro();
+    }else if(msg.includes("eur") && msg.includes("current") && msg.includes("favorable")){
+        return currency.recommendEuro();
     }else if(msg.includes("eur") && msg.includes("exchange") && msg.includes("rate")){
         return "The current euro exchange rate is " + currency.getCurrentEuro();
     }else if(msg.includes("help")){

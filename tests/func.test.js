@@ -7,11 +7,12 @@ const { expect } = require("chai");
 
 //-----------------------------------------------
 //Constatns
-const help = "Get my name - Keywords WHAT and NAME" + "<br><br>" +
-    "Get actual time -Keywords WHAT and TIME" + "<br><br>" +
-    "Get the current euro exchange rate - Keywords EUR, EXCHANGE and RATE " + "<br><br>" +
-    "Get the history of the euro- Keywords EUR and HISTORY " + "<br><br>" +
-    "Help commands - write HELP";
+const help= "Get my name - Keywords WHAT and NAME"+"<br><br>"+
+             "Get actual time -Keywords WHAT and TIME"+"<br><br>"+
+             "Get the current euro exchange rate - Keywords EUR, EXCHANGE and RATE "+"<br><br>"+
+             "Get a recommendation to buy euro- Keywords EUR, CURRENT and FAVORABLE "+"<br><br>"+
+             "Get the history of the euro- Keywords EUR and HISTORY "+"<br><br>"+
+             "Help commands - write HELP";
 const name = "Adrian";
 
 //-----------------------------------------------
@@ -77,4 +78,19 @@ describe("Test currency", function() {
         expect(currency.downloadCurrencyData("Nevim")).to.be.false;
         //expect(currency.downloadCurrencyData("EUR")).to.be.false;
     });
+    it("Test - Decreasing", function() {
+        expect(currency.decreasing([parseFloat("24.42"),parseFloat("24.415"),parseFloat("24.314")])).to.be.ok;
+        expect(currency.decreasing([parseFloat("24.42"),parseFloat("24.415"),parseFloat("25.314")])).to.be.not.ok;
+        expect(currency.decreasing([parseFloat("1"),parseFloat("0"),parseFloat("0.5")])).to.be.not.ok;
+    });
+    it("Test - Average", function() {
+        expect(currency.average([parseFloat("24.42"),parseFloat("24.415"),parseFloat("24.314")])).to.be.ok;
+        expect(currency.average([parseFloat("24.42"),parseFloat("24.415"),parseFloat("29.314")])).to.be.not.ok;
+        expect(currency.average([parseFloat("1"),parseFloat("0"),parseFloat("0.5")])).to.be.not.ok;
+    });
+
+    it("Test - Recommend", function() {
+        expect(currency.recommendEuro()).to.be.ok;
+    });
+    
 });
