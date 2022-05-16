@@ -33,6 +33,11 @@ describe("Test message manager", function() {
         expect(messageManager.requestReview("Give me current euro exchange rate", name)).to.be.equal("The current euro exchange rate is " + currency.getCurrentEuro());
         expect(messageManager.requestReview("Give me acutal euro.", name)).to.be.equal(help);
     });
+    it("Test - Get euro recommendation", function() {
+        expect(messageManager.requestReview("Is the current euro fovarable ?", name)).to.be.ok;
+        expect(messageManager.requestReview("Eur current favorable ?", name)).to.be.ok;
+        expect(messageManager.requestReview("Recommend me euro", name)).to.be.equal(help);
+    });
     it("Test - Get euro history", function() {
         expect(messageManager.requestReview("Give me euro history.", name)).to.be.equal(currency.getHistoryEuro());
         expect(messageManager.requestReview("Eur history.", name)).to.be.equal(currency.getHistoryEuro());

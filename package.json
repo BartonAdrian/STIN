@@ -5,7 +5,6 @@
     "main": "index.js",
     "scripts": {
         "test": "mocha './tests/func.test.js'",
-        "testf": "mocha './tests/script.test.js'",
         "coverage": "jest --coverage"
     },
     "author": "Adrian Bartoň",
@@ -21,6 +20,7 @@
     },
     "devDependencies": {
         "chai": "^4.3.6",
+        "jasmine": "^4.1.0",
         "jest": "^28.0.2",
         "mocha": "^9.2.2"
     }
