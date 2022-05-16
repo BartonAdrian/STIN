@@ -74,13 +74,14 @@ function recommendEuro(){
     if(decreasing(rates)){
         return "I recommend buying the euro (declining for three days).";
     }else{
-        res += "Not declining for three days. ";
+        res += "Not declining for three days.";
     }
 
-    if(average(rates)){
-        return "I recommend buying the euro (The last increase does not exceed 10% of the average).";
+    var [result,avg]=average(rates);
+    if(result){
+        return "I recommend buying the euro (The last increase does not exceed 10% of the average).Deff: "+avg;
     }else{
-        res += "The latest increase exceeds 10% of the average.";
+        res += "The latest increase exceeds 10% of the average. Diff: "+avg;
     }
     
     return "I do not recommend buying the euro ("+res+")";
@@ -96,9 +97,9 @@ function decreasing(rates){
 function average(rates){
     let avg=((rates[0]+rates[1]+rates[2])/3)/10;
     if(Math.abs(rates[2]-rates[1])<avg){
-        return true;
+        return [true,Math.abs(rates[2]-rates[1])-avg];
     }
-    return false;
+    return [false,Math.abs(rates[2]-rates[1])-avg];
 }
 
 //-----------------------------------------------
