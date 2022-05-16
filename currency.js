@@ -72,9 +72,9 @@ function recommendEuro(){
     let rates=[parseFloat(llday.split("|")[4].replace(",",".")),parseFloat(lday.split("|")[4].replace(",",".")),parseFloat(day.split("|")[4].replace(",","."))];
 
     if(decreasing(rates)){
-        return "I recommend buying the euro (declining for three days).";
+        return "I recommend buying the euro (declining for three days). ("+rates+")";
     }else{
-        res += "Not declining for three days.";
+        res += "Not declining for three days. ("+rates+")";
     }
 
     var [result,avg]=average(rates);

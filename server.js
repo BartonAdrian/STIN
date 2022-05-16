@@ -23,7 +23,8 @@ currency.downloadCurrencyData("EUR");
 
 //-----------------------------------------------
 //Cron Job- every day between 12-15 at 5 minute intervals
-const job = new CronJob('0 */5 14-15 * * MON-FRI', function() {
+const job = new CronJob('0 */5 12-15 * * MON-FRI', function() {
+    console.log("Download data from URL. "+Date.now());
     var date = timeManager.parseDate(currency.getCurrentEuro().split("-")[1]);
     if (timeManager.isDateToday(date) == false) {
         currency.downloadCurrencyData("EUR");
