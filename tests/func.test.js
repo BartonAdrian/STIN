@@ -90,8 +90,8 @@ describe("Test currency", function() {
     });
     it("Test - Average", function() {
         expect(currency.average([parseFloat("24.42"),parseFloat("24.415"),parseFloat("24.314")])).to.be.ok;
-        expect(currency.average([parseFloat("24.42"),parseFloat("24.415"),parseFloat("29.314")])).to.be.not.ok;
-        expect(currency.average([parseFloat("1"),parseFloat("0"),parseFloat("0.5")])).to.be.not.ok;
+        expect(currency.average([parseFloat("24.42"),parseFloat("24.415"),parseFloat("29.314")])).to.be.ok;
+        expect(currency.average([parseFloat("1"),parseFloat("0"),parseFloat("0.5")])).to.be.ok;
     });
 
     it("Test - Recommend", function() {
